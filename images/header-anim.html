@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative Art Sketch</title>
+    <style>
+      /* Basic styling to ensure the canvas fills the viewport */
+      body {
+        margin: 0;
+        overflow: hidden; /* Hide scrollbars */
+        background-color: #e6e7ec; /* A light background color */
+      }
+      canvas {
+        display: block; /* Removes bottom margin */
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The canvas-sketch library will automatically create and append a <canvas> element to the body -->
+    <script type="module">
+      // Import the necessary functions from browser-compatible ES Modules via a CDN
+      import canvasSketch from 'https://cdn.skypack.dev/canvas-sketch';
+      import random from 'https://cdn.skypack.dev/canvas-sketch-util/random';
+      // Import the entire math module as it's provided as a default export from the CDN
+      import math from 'https://cdn.skypack.dev/canvas-sketch-util/math';
+
+      const settings = {
+        animate: true,
+      };
+
+      const sketch = ({ width, height }) => {
+        const numBodies = 3; // The number of bodies to create
+        // PERFORMANCE NOTE: Reducing dot count is the most effective way to improve framerate.
+        // O(n^2) complexity for line drawing is very expensive.
+        const numDotsPerBody = 300; // Dots per body
+        const bodies = [];
+        const maxLineDistance = 90; // Maximum distance to draw a line between points
+
+        // Create the bodies
+        for (let i = 0; i < numBodies; i++) {
+          const body = {
+            center: [random.range(width * 0.2, width * 0.8), random.range(height * 0.2, height * 0.8)],
+            dots: [],
+            // Assign a unique noise offset for each body to give it a distinct movement pattern
+            noiseOffset: random.value() * 1000,
+          };
+
+          // Create the dots for each body
+          for (let j = 0; j < numDotsPerBody; j++) {
+            body.dots.push({
+              pos: [random.value(), random.value(), random.value()],
+              radius: Math.abs(random.gaussian() * 0.8) + 0.01 // Ensure radius is always positive
+            });
+          }
+          bodies.push(body);
+        }
+
+        const timeSpeed = 0.08;
+        const frequency = 0.8;
+        // This factor controls how strongly particles are pulled toward the body's center
+        const gravity = 0.005;
+
+        // The main animation loop, called on every frame
+        return ({ context, time, width, height }) => {
+          // Set a white background
+          context.fillStyle = '#e6e7ec';
+          context.fillRect(0, 0, width, height);
+          
+          const t = time * timeSpeed;
+
+          // Iterate over each body
+          bodies.forEach(body => {
+            // First, update the screen position and radius for every dot in this frame
+            body.dots.forEach(dot => {
+              const noiseArgs = [
+                dot.pos[0] * frequency,
+                dot.pos[1] * frequency,
+                t + body.noiseOffset
+              ];
+
+              const noiseX = random.noise3D(...noiseArgs);
+              const noiseY = random.noise3D(noiseArgs[0] + 10, noiseArgs[1] + 20, t + body.noiseOffset);
+              const noiseR = random.noise3D(noiseArgs[0] + 30, noiseArgs[1] + 40, t + body.noiseOffset)*0.3;
+              
+              const baseX = math.mapRange(noiseX, -1, 1, 0, width);
+              const baseY = math.mapRange(noiseY, -1, 1, 0, height);
+
+              // Store the calculated screen position and radius on the dot object for this frame
+              dot.screenX = math.lerp(baseX, body.center[0], gravity);
+              dot.screenY = math.lerp(baseY, body.center[1], gravity);
+              dot.screenRadius = math.mapRange(noiseR, -1, 1, 0, dot.radius * 2.0);
+            });
+
+            // Draw lines between close points.
+            // This loop is already optimized to only check each pair once (j = i + 1).
+            for (let i = 0; i < body.dots.length; i++) {
+              for (let j = i + 1; j < body.dots.length; j++) {
+                const dotA = body.dots[i];
+                const dotB = body.dots[j];
+
+                // Calculate the distance between two points
+                const dx = dotA.screenX - dotB.screenX;
+                const dy = dotA.screenY - dotB.screenY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                // If the distance is below the threshold, draw a line
+                if (dist < maxLineDistance) {
+                  context.lineWidth = 0.3;
+                  // Make the line's opacity decrease as the distance increases
+                  context.strokeStyle = `rgba(0, 0, 0, ${1 - dist / maxLineDistance})`;
+                  context.beginPath();
+                  context.moveTo(dotA.screenX, dotA.screenY);
+                  context.lineTo(dotB.screenX, dotB.screenY);
+                  context.stroke();
+                }
+              }
+            }
+            
+            // Finally, draw the dots on top of the lines
+            context.fillStyle = 'black';
+            body.dots.forEach(dot => {
+              context.beginPath();
+              context.arc(dot.screenX, dot.screenY, dot.screenRadius, 0, Math.PI * 2);
+              context.fill();
+            });
+          });
+        };
+      };
+
+      // Start the sketch
+      canvasSketch(sketch, settings);
+    </script>
+  </body>
+</html>
