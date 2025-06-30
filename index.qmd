@@ -1,11 +1,49 @@
 ---
-title: "polaris-research.github.io"
+title: "Polarization in Online Landscapes and Radical Influence Studies"
+subtitle: "A Multimodal Investigation of Democratic Erosion"
+about:
+  template: trestles
+  image: "https://placehold.co/600x400/171021/e6e7ec?text=Polaris+Research"
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    - icon: github
+      text: GitHub
+      href: https://github.com/polaris-research
+
 ---
 
-This is a Quarto website. !
+<style>
+  .small-text {
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+</style>
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+### Project Overview
 
-```{r}
-1 + 1
-```
+Democracy and political culture in the Western world are under threat, marked by growing polarization, the erosion of democratic values, and the disintegration of public discourse in the digital age. This crisis is exemplified by the rise and disproportionate success of the global New Right. Social media platforms like TikTok, X, and Facebook play a pivotal role in this transformation, reshaping not only the dynamics of political communication but also undermining fundamental democratic principles.
+
+By amplifying extreme voices and prioritizing engagement-driven content—often fueled by emotional and polarizing rhetoric—these platforms actively reshape public discourse. Our project argues that this disruption contributes to an "unlearning" of democracy, where citizens become habituated to emotionalized and antagonistic forms of discourse, undermining rational deliberation.
+
+To analyze what we conceive as democratic erosion, we build on an interdisciplinary theoretical framework that combines two complementary perspectives:  
+
+ 1.  **The Democratic Erosion Triad:** We examine the erosion of the public sphere through three interconnected processes: **radicalization**, **mainstreaming**, and **political polarization**.  
+
+ 2.  **Platform Theory & Multimodality:** We consider these social processes in the context of platform theory, social media **affordances**, and the power of **multimodal** communication (text, images, video, audio) to shape how users experience and respond to political messages.
+
+---
+
+### Our Approach
+
+This project uses an explanatory mixed-methods design to ensure robust and validated findings. Our methodology combines:
+
+-   **Continuous Content Collection:** Systematic, large-scale collection of TikTok data to create a comprehensive and scalable content database.
+-   **Computational & Multimodal Content Analysis:** Using AI-driven analytics, computer vision, and NLP to analyze textual, visual, and auditory elements of content at scale.
+-   **Qualitative Analysis:** In-depth interpretive analysis of multimodal content to understand narrative strategies, framing, and symbolic meaning.
+-   **Network Analysis:** Mapping the structure and dynamics of right-wing networks on TikTok to identify key actors, content diffusion, and community clusters.
+-   **Survey Experiments & Focus Groups:** Investigating the impact of far-right content on audience perceptions, emotions, and attitudes towards democracy through controlled experiments and qualitative discussions.
+
+---

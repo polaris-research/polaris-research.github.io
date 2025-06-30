@@ -2,8 +2,57 @@
 title: "About"
 ---
 
-About this site
+## The Research Team
 
-```{r}
-1 + 1
+Our project brings together a diverse team of researchers with expertise in political communication, media studies, network analysis, and computational methods.
+
+```{=html}
+<style>
+  .small-text {
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+</style>
 ```
+
+::::::: grid
+::: {.g-col-12 .g-col-md-6}
+#### Prof. Dr. Matthias Revers
+
+<p class="small-text">
+
+University of Leeds
+
+</p>
+:::
+
+::: {.g-col-12 .g-col-md-6}
+#### Dr. Julia Niemann-Lenz
+
+<p class="small-text">
+
+DZHW, Hannover
+
+</p>
+:::
+
+::: {.g-col-12 .g-col-md-6}
+#### Hendrik Meyer
+
+<p class="small-text">
+
+University of Hamburg
+
+</p>
+:::
+
+::: {.g-col-12 .g-col-md-6}
+#### Lasse Rodeck
+
+<p class="small-text">
+
+University of Hamburg
+
+</p>
+:::
+:::::::
