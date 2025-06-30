@@ -3,7 +3,7 @@ title: "Polarization in Online Landscapes and Radical Influence Studies"
 subtitle: "A Multimodal Investigation of Democratic Erosion"
 about:
   template: trestles
-  image: "https://placehold.co/600x400/171021/e6e7ec?text=Polaris+Research"
+  image: "https://placehold.co/600x400/171021/e6e7ec?text=Polarization+in+Online Landscapes+and+Radical+Influence+Studies"
   image-shape: rounded
   links:
     - icon: twitter
