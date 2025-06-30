@@ -1,0 +1,24 @@
+---
+title: "Publications"
+---
+
+```{=html}
+<div style="display: flex; justify-content: center;">
+  <iframe src="images/header-publications.html" width="980" height="540" style="border:1px solid #e6e7ec;"></iframe>
+</div>
+```
+
+```{=html}
+<div class="publication-card">
+  <h3>Beyond Anti-Elitism and Out-Group Attacks: How Concerns Shape the AfD’s Populist Representation on German TikTok During the 2024 European Elections</h3>
+  <div class="metadata">
+    <span class="authors">H. Meyer, J. Niemann-Lenz, L. Rodeck, and M. Revers</span>
+    -
+    <span class="journal"></span>
+  </div>
+  <p class="abstract">
+    A study of the German right-wing populist party AfD's TikTok usage during the 2024 European elections reveals a strategic focus on user concerns over traditional divisive rhetoric. Analyzing video transcripts from the three months preceding the election, the study found that while anti-institutional and protectionist themes were present, content addressing issues like inflation, security, and individual rights garnered significantly higher engagement. This approach, which outperformed all other German parties combined, suggests the AfD effectively broadened its appeal by prioritizing relatable anxieties. By blending polarizing content with everyday worries, the party successfully engaged a wider audience, raising new questions about effective online populist communication.
+  </p>
+  <a href="10.31219/osf.io/yk3u4" class="link-button">Read Publication</a>
+</div>
+```

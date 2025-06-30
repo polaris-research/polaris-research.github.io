@@ -8,12 +8,25 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: publications.qmd
+        text: Publications
+    right:
+      - icon: github
+        text: GitHub
+        href: https://github.com/polaris-research
+  page-footer:
+    center: 
+      - text: "About"
+        href: about.qmd
+  cookie-consent: true
+  back-to-top-navigation: true
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+    page-layout: article
 
 
 
