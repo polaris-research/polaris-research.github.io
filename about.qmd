@@ -17,7 +17,7 @@ Our project brings together a diverse team of researchers with expertise in poli
 
 ::::::: grid
 ::: {.g-col-12 .g-col-md-6}
-#### Prof. Dr. Matthias Revers
+#### Dr. Matthias Revers
 
 <p class="small-text">
 
