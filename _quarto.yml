@@ -4,12 +4,15 @@ project:
 website:
   title: "Researching Polarisation in Social Media"
   navbar:
+    search: true
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: blog.qmd
+        text: Blog
       - href: publications.qmd
         text: Publications
+      - about.qmd
     right:
       - icon: github
         text: GitHub
@@ -20,6 +23,8 @@ website:
         href: about.qmd
   cookie-consent: true
   back-to-top-navigation: true
+  draft-mode: unlinked
+  
 
 format:
   html:

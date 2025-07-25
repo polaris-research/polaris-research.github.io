@@ -1,0 +1,143 @@
+---
+title: "Decoding the Discourse: What Political Parties are Really Saying on TikTok"
+subtitle: "An analysis of the topics, emotions, and strategies shaping the 2025 German federal election campaign online."
+description: "This article analyzes over x TikTok videos from official candidates in the 2025 German federal election campaign. We explore the dominant political topics and emotional strategies used by different parties, revealing how digital narratives are being crafted to mobilize voters. The analysis highlights a shift in the AfD's communication strategy compared to previous elections and demonstrates how the platform has become a key, data-driven battleground for political influence."
+image: "https://s14.gifyu.com/images/bKo2J.gif"
+author: 
+  - name: "Lasse Rodeck"
+    affiliation: "Universität Hamburg"
+    email: "lasserodeck@hotmail.de"
+date: "2025-07-26"
+categories: [Preprint, German Federal Election 2025, TikTok, Political Communication]
+bibliography: references.bib
+format: 
+  html:
+    smooth-scroll: true
+    citations-hover: true
+    footnotes-hover: true
+    crossrefs-hover: true
+    toc: true
+    toc-expand: true
+    toc_float: 
+      collapsed: true
+      smooth_scroll: true
+    toc-title: Contents
+    anchor-sections: true
+draft: true
+---
+
+::: content-card
+![](https://s14.gifyu.com/images/bKo2J.gif){fig-align="center" width="100%"}
+:::
+
+# The New Digital Soapbox
+
+The battle for Germany's 2025 federal election isn't just happening on debate stages; it's unfolding in real-time on TikTok. Here, millions of views are up for grabs every day, and the old rules of political communication don't apply. Victory belongs to content that is short, sharp, and emotionally resonant.
+
+So, what does that look like in practice? We analyzed a dataset of over 6,000 TikTok videos from the 2025 campaign to find out. By transcribing and classifying content from official party candidates for office and the chancellorship, we've been able to map the digital battlefield, revealing the topics, emotions, and strategies that Germany's political class is using to shape the online race.
+
+# How We Did It: A Quick Methodological Note
+
+Our approach breaks down each video into two key dimensions: its subject matter and its emotional flavor. It's important to note that our dataset focuses specifically on videos posted by official candidates during the 2025 federal election campaign. We are analyzing the communication of the political elites themselves, not the broader public conversation.
+
+Our analysis sorted their content into seven core political buckets: classic kitchen-table issues like the **Economy** (jobs, inflation, growth) and **Social Justice** (equality, poverty), and the green agenda of **Climate Protection**. We also tracked foreign policy under **Peace & Security**, specific debates on **Refugees & Asylum**, the state of **Education**, and the divisive, hot-button debates that constitute the **Culture War**.
+
+Alongside the topics, we analyzed the emotional undercurrent of the videos. Our framework began with the foundational work of psychologist Paul Ekman, whose influential model identifies a core set of six universal basic emotions: anger, disgust, fear, joy, sadness, and surprise [@ekman1992]. However, raw political communication requires a more tailored lens. We therefore created a hybrid model, enriching Ekman's core with two key dimensions from Robert Plutchik's [@plutchik1982] more complex "wheel of emotions": **Anticipation** and **Trust**.
+
+![Illustration of various emotional models with some psychological state [@nandwani2021]](https://i.postimg.cc/K8YSQGzK/Emotional-Axes-Nandwani.jpg)
+
+These are crucial for capturing forward-looking campaign messaging and how candidates build credibility. We further adapted Ekman's categories to the political context, for instance, broadening **"Anger"** to **"Anger/Indignation"** to include a sense of moral outrage, and reframing **"Sadness"** as **"Disappointment/Frustration"** to reflect a more active response to political failures. Our final set of emotions, therefore, includes these adapted and added categories along with **"Fear/Anxiety"** and the rarest of political emotions—genuine **"Joy/Contentment"**.
+
+# Building on Our Previous Research: A Shift in Strategy?
+
+This analysis builds directly on our previous paper, "Beyond Anti-Elitism and Out-Group Attacks: How Concerns Shape the AfD's Populist Representation on German TikTok During the 2024 European Elections" [@meyer2024]. In that study, we focused exclusively on the AfD's communication during the EU election campaign.
+
+Our key finding then was a surprising strategic choice: while videos targeting out-groups (what we term "Horizontal Protectionism") generated the highest engagement per video, the party produced a much larger volume of content focused on the more relatable "Concerns of the People"—issues like inflation, security, and personal rights. We interpreted this as a calculated move to appeal to a broader, more moderate audience beyond their core base.
+
+The data from the 2025 federal election campaign, however, suggests a significant strategic evolution. As the stakes grew higher, the AfD appears to have shifted away from the broader "concerns" framework and doubled down on what works best to mobilize its base: anger and out-group messaging. As our current analysis shows, "Refugees & Asylum" is now the undeniable center of their online identity, and "Anger/Indignation" is their primary communication mode. This suggests a pivot from a strategy of persuasion aimed at undecideds to one of pure, high-intensity mobilization of their core supporters for the more critical federal election.
+
+# What's Dominating the Conversation?
+
+Before diving into party politics, let's get a lay of the land. What are the big issues on the candidates' minds, and what's the general mood?
+
+## The Political Agenda on TikTok
+
+<iframe src="Graphics/interactive_categories.html" title="Interactive bar chart of video categories" width="100%" height="700" style="border: none; background: transparent;">
+
+</iframe>
+
+It's clear that bread-and-butter issues are front and center. **"Economy"** and **"Social Justice"** command the most attention, suggesting that even on a platform known for viral fluff, political discourse from candidates is still anchored to voters' real-world concerns. While **"Culture War"** topics are known for being divisive and generating engagement, they appear less frequently than these core governance themes.
+
+## The Emotional Temperature: A Wave of Negativity
+
+If the topics are about bread-and-butter issues, the tone is anything but comforting.
+
+<iframe src="Graphics/interactive_emotions.html" title="Interactive bar chart of video emotions" width="100%" height="700" style="border:none;">
+
+</iframe>
+
+The emotional landscape is overwhelmingly negative. **"Anger/Indignation"** and **"Disappointment/Frustration"** swamp everything else. This is a deliberate strategic choice. Grievance sells. By framing politics as a story of failure and betrayal, candidates aim to fire up their base and attack their rivals. Positive emotions like "Joy" or "Trust" are practically statistical noise, painting a picture of a political TikTok that is cynical, critical, and conflict-driven.
+
+# A Partisan Lens: How the Parties Fight It Out
+
+The big picture hides the fascinating details. When we slice the data by party, we see that each has a distinct playbook for TikTok.
+
+## Topic Strategies: Owning the Issues
+
+<iframe src="Graphics/interactive_categories_by_party.html" title="Interactive faceted bar chart of topics by party" width="100%" height="900" style="border:none;">
+
+</iframe>
+
+You can see their priorities immediately. The **AfD** candidates have gone all-in on **"Refugees & Asylum,"** making it the undeniable center of their online identity. Candidates from **Bündnis 90/Die Grünen** naturally dominate the conversation on **"Climate Protection."** The major parties, **SPD** and **CDU/CSU**, cast a wider net, focusing their candidates' energy on the big-tent issues of **"Economy"** and **"Social Justice."** Meanwhile, **Die Linke** carves out its niche on **"Social Justice,"** and the newcomer **BSW** stakes its claim on **"Peace & Security."**
+
+## Emotional Strategies: The Feeling is the Message
+
+The emotional strategies are just as polarized.
+
+<iframe src="Graphics/interactive_emotions_by_party.html" title="Interactive faceted bar chart of emotions by party" width="100%" height="800" style="border:none;">
+
+</iframe>
+
+Anger is the weapon of choice for many, but some wield it more aggressively than others. For **AfD** candidates, **"Anger/Indignation"** isn't just one tool in the box; it *is* the toolbox. They deploy outrage at a scale that dwarfs every other party. Candidates from the leftist parties, **SPD** and **Die Linke**, also lean heavily into **"Anger"** and **"Disappointment,"** framing themselves as champions against injustice. The center-right **CDU/CSU** and **FDP**, along with the **BSW**, also primarily traffic in critical emotions. The main outlier? The **Greens**. While their candidates still use anger, they are the only party with a significant showing in the **"Anticipation/Hope/Optimism"** category, hinting at a more solution-focused message.
+
+# Connecting Feelings and Policies
+
+The real magic happens when you see how topics and emotions are linked. It's one thing to talk about the economy; it's another to talk about it with fear.
+
+<iframe src="Graphics/interactive_correlation_heatmap.html" title="Interactive correlation heatmap of topics and emotions" width="100%" height="800" style="border:none;">
+
+</iframe>
+
+The data draws clear lines between feelings and policies. **"Peace & Security"** is tightly correlated with **"Fear/Anxiety,"** a classic pairing to frame global events as immediate threats. The fuel for **"Anger/Indignation"** comes overwhelmingly from **"Culture War"** issues, confirming these topics as the platform's primary outrage generator. What's also revealing is what isn't there: positive emotions like **"Joy/Contentment"** have virtually no connection to any political topic, underscoring just how problem-focused the entire discourse is.
+
+## Zooming in on Anger
+
+Let's drill down on anger, the platform's dominant emotion. The plot below shows the anger score for every single video, broken down by topic and party.
+
+<iframe src="Graphics/interactive_anger_distribution.html" title="Interactive faceted boxplot of anger scores" width="100%" height="800" style="border:none;">
+
+</iframe>
+
+This view is incredibly telling. For the **AfD**, the *lowest* anger scores on topics like "Refugees & Asylum" are often higher than the *average* scores for other parties. Their communication isn't just angry; it's consistently and intensely so. Compare that to the **Greens**, where even on hot-button issues, the anger levels are visibly more restrained. They're playing a different rhetorical game.
+
+# Taking the Pulse: The Discourse Day by Day
+
+Finally, our data lets us see this all unfold over time, giving us a daily pulse of the online campaign.
+
+<iframe src="Graphics/interactive_categories_over_time.html" title="Interactive time-series chart of topics" width="100%" height="800" style="border:none;">
+
+</iframe>
+
+The topic chart acts as a real-time monitor of the political agenda. You can spot the exact days when a particular issue surged, offering a chance to connect online chatter with real-world events—a policy rollout, a media scandal, or a global crisis.
+
+And just as topics ebb and flow, so does the emotional mood. This next chart is a fever graph of the campaign's emotional state. Are there days when anger spikes across the board? Does a specific event trigger a rare burst of hope? This transforms our analysis from a static photo into a moving picture.
+
+<iframe src="Graphics/interactive_emotions_over_time.html" title="Interactive time-series chart of emotions" width="100%" height="800" style="border:none;">
+
+</iframe>
+
+# So, What did we learn?
+
+![](https://images.squarespace-cdn.com/content/v1/54f4b48fe4b01c0a849f7194/1611878277050-OSBTOXX9R8Z1MO29B392/QEn_Io.gif){fig-alt="What did we learn, Palmer?" width="100%"}
+
+This dive into the data reveals a few hard truths. The political climate on TikTok is overwhelmingly negative, a space that runs on anger, frustration, and disappointment. Within this arena, parties are not improvising; their candidates have clear, distinct playbooks, from the AfD's strategy of focused outrage to the Greens' appeal to measured hope. And perhaps most importantly, nothing is neutral. Topics and emotions are deliberately packaged together to create the most potent political message possible.
