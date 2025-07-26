@@ -218,3 +218,83 @@ header.quarto-secondary-nav,
   background-color: #1a1a1a;
   color: #ffffff;
 }
+
+
+#quarto-appendix.default {
+    background-color: transparent;
+    padding-top: 1.5em;
+    margin-top: 2em;
+    z-index: 998;
+}
+
+
+/* =================================================================== */
+/* Content Card Styling
+/* =================================================================== */
+
+.content-card {
+  background-color: var(--color-2);
+  color: var(--color-1);
+  border-radius: 8px; /* Consistent with your .widget class */
+  overflow: hidden; /* Ensures the image respects the border radius */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional image for the top of the card */
+.content-card .card-image {
+  width: 100%;
+  height: 180px; /* Adjust height as needed */
+  object-fit: cover;
+  display: block;
+}
+
+/* Container for the text content and button */
+.content-card .card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allows the body to fill the card's height */
+  gap: 0.75rem;
+}
+
+.content-card .card-title {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.content-card .card-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  flex-grow: 1; /* Pushes the link to the bottom */
+}
+
+/* A styled link or button for calls to action */
+.content-card .card-link {
+  display: inline-block;
+  align-self: flex-start; /* Aligns the button to the left */
+  font-family: var(--font-headings);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-1);
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--color-1);
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.content-card .card-link:hover {
+  background-color: var(--color-1);
+  color: var(--color-2);
+}
