@@ -3,134 +3,147 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generative Art Sketch</title>
+    <title>High-Performance Generative Art</title>
     <style>
-      /* Basic styling to ensure the canvas fills the viewport */
       body {
         margin: 0;
-        overflow: hidden; /* Hide scrollbars */
-        background-color: #e6e7ec; /* A light background color */
+        overflow: hidden;
+        background-color: #e6e7ec;
       }
       canvas {
-        display: block; /* Removes bottom margin */
+        display: block;
         width: 100vw;
         height: 100vh;
       }
     </style>
   </head>
   <body>
-    <!-- The canvas-sketch library will automatically create and append a <canvas> element to the body -->
     <script type="module">
-      // Import the necessary functions from browser-compatible ES Modules via a CDN
       import canvasSketch from 'https://cdn.skypack.dev/canvas-sketch';
       import random from 'https://cdn.skypack.dev/canvas-sketch-util/random';
-      // Import the entire math module as it's provided as a default export from the CDN
       import math from 'https://cdn.skypack.dev/canvas-sketch-util/math';
 
       const settings = {
         animate: true,
+        dimensions: [window.innerWidth, window.innerHeight],
       };
 
       const sketch = ({ width, height }) => {
-        const numBodies = 3; // The number of bodies to create
-        // PERFORMANCE NOTE: Reducing dot count is the most effective way to improve framerate.
-        // O(n^2) complexity for line drawing is very expensive.
-        const numDotsPerBody = 300; // Dots per body
+        const numBodies = 3;
+        const numDotsPerBody = 450; 
         const bodies = [];
-        const maxLineDistance = 90; // Maximum distance to draw a line between points
+        const maxDist = 80;
+        const maxDistSq = maxDist * maxDist;
+        const cellSize = maxDist;
 
-        // Create the bodies
         for (let i = 0; i < numBodies; i++) {
           const body = {
             center: [random.range(width * 0.2, width * 0.8), random.range(height * 0.2, height * 0.8)],
-            dots: [],
-            // Assign a unique noise offset for each body to give it a distinct movement pattern
+            dots: Array.from({ length: numDotsPerBody }, (_, id) => ({
+              id,
+              pos: [random.value(), random.value()],
+              baseRadius: Math.abs(random.gaussian() * 0.8) + 0.2,
+              screenX: 0,
+              screenY: 0,
+              screenRadius: 0
+            })),
             noiseOffset: random.value() * 1000,
           };
-
-          // Create the dots for each body
-          for (let j = 0; j < numDotsPerBody; j++) {
-            body.dots.push({
-              pos: [random.value(), random.value(), random.value()],
-              radius: Math.abs(random.gaussian() * 0.8) + 0.01 // Ensure radius is always positive
-            });
-          }
           bodies.push(body);
         }
 
         const timeSpeed = 0.08;
         const frequency = 0.8;
-        // This factor controls how strongly particles are pulled toward the body's center
         const gravity = 0.005;
 
-        // The main animation loop, called on every frame
         return ({ context, time, width, height }) => {
-          // Set a white background
           context.fillStyle = '#e6e7ec';
           context.fillRect(0, 0, width, height);
           
           const t = time * timeSpeed;
+          const cols = Math.ceil(width / cellSize);
+          const rows = Math.ceil(height / cellSize);
 
-          // Iterate over each body
           bodies.forEach(body => {
-            // First, update the screen position and radius for every dot in this frame
-            body.dots.forEach(dot => {
-              const noiseArgs = [
-                dot.pos[0] * frequency,
-                dot.pos[1] * frequency,
-                t + body.noiseOffset
-              ];
+            // 1. Reset Grid (Using a flat array for speed)
+            const grid = Array.from({ length: cols * rows }, () => []);
 
-              const noiseX = random.noise3D(...noiseArgs);
-              const noiseY = random.noise3D(noiseArgs[0] + 10, noiseArgs[1] + 20, t + body.noiseOffset);
-              const noiseR = random.noise3D(noiseArgs[0] + 30, noiseArgs[1] + 40, t + body.noiseOffset)*0.3;
-              
-              const baseX = math.mapRange(noiseX, -1, 1, 0, width);
-              const baseY = math.mapRange(noiseY, -1, 1, 0, height);
-
-              // Store the calculated screen position and radius on the dot object for this frame
-              dot.screenX = math.lerp(baseX, body.center[0], gravity);
-              dot.screenY = math.lerp(baseY, body.center[1], gravity);
-              dot.screenRadius = math.mapRange(noiseR, -1, 1, 0, dot.radius * 2.0);
-            });
-
-            // Draw lines between close points.
-            // This loop is already optimized to only check each pair once (j = i + 1).
+            // 2. Update Positions & Fill Grid
             for (let i = 0; i < body.dots.length; i++) {
-              for (let j = i + 1; j < body.dots.length; j++) {
-                const dotA = body.dots[i];
-                const dotB = body.dots[j];
+              const dot = body.dots[i];
+              const noiseX = random.noise3D(dot.pos[0] * frequency, dot.pos[1] * frequency, t + body.noiseOffset);
+              const noiseY = random.noise3D(dot.pos[0] * frequency + 10, dot.pos[1] * frequency + 20, t + body.noiseOffset);
+              const noiseR = random.noise3D(dot.pos[0] * frequency + 30, dot.pos[1] * frequency + 40, t + body.noiseOffset) * 0.3;
+              
+              dot.screenX = math.lerp(math.mapRange(noiseX, -1, 1, 0, width), body.center[0], gravity);
+              dot.screenY = math.lerp(math.mapRange(noiseY, -1, 1, 0, height), body.center[1], gravity);
+              dot.screenRadius = math.mapRange(noiseR, -1, 1, 0, dot.baseRadius * 2.5);
 
-                // Calculate the distance between two points
-                const dx = dotA.screenX - dotB.screenX;
-                const dy = dotA.screenY - dotB.screenY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                // If the distance is below the threshold, draw a line
-                if (dist < maxLineDistance) {
-                  context.lineWidth = 0.3;
-                  // Make the line's opacity decrease as the distance increases
-                  context.strokeStyle = `rgba(0, 0, 0, ${1 - dist / maxLineDistance})`;
-                  context.beginPath();
-                  context.moveTo(dotA.screenX, dotA.screenY);
-                  context.lineTo(dotB.screenX, dotB.screenY);
-                  context.stroke();
+              const gx = (dot.screenX / cellSize) | 0;
+              const gy = (dot.screenY / cellSize) | 0;
+              if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) {
+                grid[gx + gy * cols].push(dot);
+              }
+            }
+
+            // 3. Batch Lines by Opacity (Color Binning)
+            // We use 10 bins to represent opacity levels from 0.1 to 1.0
+            const opacityBins = Array.from({ length: 11 }, () => new Path2D());
+
+            for (let i = 0; i < body.dots.length; i++) {
+              const dotA = body.dots[i];
+              const gx = (dotA.screenX / cellSize) | 0;
+              const gy = (dotA.screenY / cellSize) | 0;
+
+              for (let x = gx - 1; x <= gx + 1; x++) {
+                for (let y = gy - 1; y <= gy + 1; y++) {
+                  if (x < 0 || x >= cols || y < 0 || y >= rows) continue;
+                  
+                  const neighbors = grid[x + y * cols];
+                  for (let k = 0; k < neighbors.length; k++) {
+                    const dotB = neighbors[k];
+                    
+                    // CRITICAL: Only process if B has a higher ID than A to avoid double-checks
+                    if (dotA.id >= dotB.id) continue;
+
+                    const dx = dotA.screenX - dotB.screenX;
+                    const dy = dotA.screenY - dotB.screenY;
+                    const distSq = dx * dx + dy * dy;
+
+                    if (distSq < maxDistSq) {
+                      const dist = Math.sqrt(distSq);
+                      const opacity = 1 - dist / maxDist;
+                      const binIndex = (opacity * 10) | 0;
+                      
+                      const path = opacityBins[binIndex];
+                      path.moveTo(dotA.screenX, dotA.screenY);
+                      path.lineTo(dotB.screenX, dotB.screenY);
+                    }
+                  }
                 }
               }
             }
-            
-            // Finally, draw the dots on top of the lines
+
+            // 4. Execute Batched Strokes
+            context.lineWidth = 0.5;
+            for (let i = 1; i <= 10; i++) {
+              context.strokeStyle = `rgba(0, 0, 0, ${i / 10})`;
+              context.stroke(opacityBins[i]);
+            }
+
+            // 5. Batch Draw Dots
             context.fillStyle = 'black';
-            body.dots.forEach(dot => {
-              context.beginPath();
-              context.arc(dot.screenX, dot.screenY, dot.screenRadius, 0, Math.PI * 2);
-              context.fill();
-            });
+            const dotPath = new Path2D();
+            for (let i = 0; i < body.dots.length; i++) {
+              const dot = body.dots[i];
+              dotPath.moveTo(dot.screenX + dot.screenRadius, dot.screenY);
+              dotPath.arc(dot.screenX, dot.screenY, dot.screenRadius, 0, Math.PI * 2);
+            }
+            context.fill(dotPath);
           });
         };
       };
 
-      // Start the sketch
       canvasSketch(sketch, settings);
     </script>
   </body>
