@@ -1,7 +1,6 @@
 
 /* --- ADD THIS AT THE TOP --- */
-@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&family=Roboto+Mono:wght@400;500&family=Rasa:wght@400;600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Gelasio:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 /* 1. General Setup & Color Palette */
 :root {
     /* P3 Colors */
@@ -9,9 +8,9 @@
         --color-2: rgb(9.0667% 6.1845% 13.106%);
 
     /* --- NEW FONT PAIRING --- */
-    --font-headings: 'Chivo', serif;
-    --font-body: 'Rasa', sans-serif;
-    --font-mono: 'Roboto Mono', monospace;
+    --font-headings: 'Gelasio', serif;
+    --font-body: 'Geist', sans-serif;
+    --font-mono: 'Geist Mono', monospace;
 }
 
 

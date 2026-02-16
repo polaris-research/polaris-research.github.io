@@ -21,7 +21,7 @@ Our project brings together a diverse team of researchers with expertise in poli
 
 <p class="small-text">
 
-University of Leeds
+University of Leeds/University of Hamburg
 
 </p>
 :::

@@ -3,118 +3,212 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generative Art Header</title>
+    <title>Publications Segment Art - Information Ecosystem</title>
     <style>
-      /* Basic styling to ensure the canvas fills a header-like container */
       body {
         margin: 0;
-        overflow: hidden; /* Hide scrollbars */
-        /* UPDATED: Switched to a light background for the page */
-        background-color: #e6e7ec; 
+        overflow: hidden;
+        background-color: #f0f2f5; 
       }
-      /* Style the canvas to act as a header */
       canvas {
-        display: block; /* Removes bottom margin */
-        width: 100%;
-        height: 300px; /* A typical header height */
+        display: block;
+        /* Position as fixed background */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1; /* Ensures it stays behind text/content */
       }
     </style>
   </head>
   <body>
-    <!-- This canvas will be the header -->
     <script type="module">
-      // Import the necessary functions from browser-compatible ES Modules via a CDN
       import canvasSketch from 'https://cdn.skypack.dev/canvas-sketch';
       import random from 'https://cdn.skypack.dev/canvas-sketch-util/random';
-      // Import the entire math module as it's provided as a default export from the CDN
       import math from 'https://cdn.skypack.dev/canvas-sketch-util/math';
 
       const settings = {
-        // The sketch will adapt to the canvas element's size, defined in the CSS.
         animate: true,
+        // Removing fixed dimensions allows the sketch to automatically 
+        // fill the window and handle resizing natively.
+        dimensions: undefined, 
       };
 
       const sketch = ({ width, height }) => {
-        // Parameters adjusted for a wide, horizontal header
-        const numDots = 500; // A single system of dots
-        const maxLineDistance = 70; // Maximum distance to draw a line
-        const dots = [];
+        const numClusters = 4;
+        const nodesPerCluster = 100; 
+        const maxDist = 65;
+        const maxDistSq = maxDist * maxDist;
+        const cellSize = maxDist;
 
-        // Unique noise offset for the whole system
-        const noiseOffset = random.value() * 1000;
+        // SPEED SETTINGS
+        const clusterVelocityScale = 0.35; 
+        const timeSpeed = 0.07; 
+        const pulseSpeedRange = [0.02, 0.06];
 
-        // Create the dots
-        for (let i = 0; i < numDots; i++) {
-          dots.push({
-            // Start with a random position reference
-            pos: [random.value(), random.value(), random.value()],
-            // And a random base radius
-            radius: Math.abs(random.gaussian() * 0.7) + 0.01,
-          });
-        }
+        // Initialize Clusters with Global Unique IDs for nodes
+        let globalNodeIdCounter = 0;
+        const clusters = Array.from({ length: numClusters }, () => ({
+          center: [random.range(width * 0.2, width * 0.8), random.range(height * 0.2, height * 0.8)],
+          velocity: [
+            random.range(-clusterVelocityScale, clusterVelocityScale), 
+            random.range(-clusterVelocityScale, clusterVelocityScale)
+          ],
+          nodes: Array.from({ length: nodesPerCluster }, () => ({
+            uid: globalNodeIdCounter++, 
+            relPos: [random.gaussian(0, 0.22), random.gaussian(0, 0.22)],
+            size: Math.pow(random.value(), 4) * 4 + 0.8,
+            resonance: random.value(), 
+            screenX: 0,
+            screenY: 0
+          })),
+          ripples: [],
+          pulses: [], 
+          noiseOffset: random.value() * 10000,
+          avgResonance: 0
+        }));
 
-        const timeSpeed = 0.08;
-        const frequency = 0.7;
-
-        // The main animation loop, called on every frame
         return ({ context, time, width, height }) => {
-          // UPDATED: Set a white background for a "light mode" feel
-          context.fillStyle = '#e6e7ec';
+          context.fillStyle = '#f0f2f5';
           context.fillRect(0, 0, width, height);
           
           const t = time * timeSpeed;
+          const cols = Math.ceil(width / cellSize);
+          const rows = Math.ceil(height / cellSize);
+          
+          const globalGrid = Array.from({ length: cols * rows }, () => []);
+          const allNodes = [];
 
-          // Update the screen position and radius for every dot
-          dots.forEach(dot => {
-            const noiseArgs = [
-              dot.pos[0] * frequency,
-              dot.pos[1] * frequency,
-              t + noiseOffset
-            ];
-
-            const noiseX = random.noise3D(...noiseArgs);
-            const noiseY = random.noise3D(noiseArgs[0] + 10, noiseArgs[1] + 20, t + noiseOffset);
-            const noiseR = random.noise3D(noiseArgs[0] + 30, noiseArgs[1] + 40, t + noiseOffset);
+          clusters.forEach(cluster => {
+            cluster.center[0] += cluster.velocity[0];
+            cluster.center[1] += cluster.velocity[1];
             
-            // Map noise to the canvas dimensions. No gravity pull.
-            dot.screenX = math.mapRange(noiseX, -1, 1, 0, width);
-            dot.screenY = math.mapRange(noiseY, -1, 1, 0, height);
-            dot.screenRadius = math.mapRange(noiseR, -1, 1, 0, dot.radius * 2);
+            // Bounce logic relative to current width/height
+            if (cluster.center[0] < width * 0.05 || cluster.center[0] > width * 0.95) cluster.velocity[0] *= -1;
+            if (cluster.center[1] < height * 0.05 || cluster.center[1] > height * 0.95) cluster.velocity[1] *= -1;
+
+            let clusterTotalRes = 0;
+            cluster.nodes.forEach(node => {
+              const nX = random.noise3D(node.relPos[0] + cluster.noiseOffset, node.relPos[1], t * 0.8);
+              const nY = random.noise3D(node.relPos[0], node.relPos[1] + cluster.noiseOffset + 20, t * 0.8);
+              
+              node.screenX = cluster.center[0] + (node.relPos[0] * width * 0.45) + (nX * 25);
+              node.screenY = cluster.center[1] + (node.relPos[1] * height * 0.45) + (nY * 25);
+              
+              clusterTotalRes += node.resonance;
+              allNodes.push(node);
+
+              const gx = (node.screenX / cellSize) | 0;
+              const gy = (node.screenY / cellSize) | 0;
+              if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) {
+                globalGrid[gx + gy * cols].push(node);
+              }
+            });
+            cluster.avgResonance = clusterTotalRes / nodesPerCluster;
           });
 
-          // Draw lines between close points
-          for (let i = 0; i < dots.length; i++) {
-            for (let j = i + 1; j < dots.length; j++) {
-              const dotA = dots[i];
-              const dotB = dots[j];
+          // Draw Halos & Ripples
+          clusters.forEach(cluster => {
+            const glowSize = 140 + Math.sin(t * 5) * 25;
+            const gradient = context.createRadialGradient(
+              cluster.center[0], cluster.center[1], 0,
+              cluster.center[0], cluster.center[1], glowSize
+            );
+            const hue = cluster.avgResonance > 0.5 ? 0 : 210;
+            const alpha = 0.06 + (cluster.avgResonance * 0.06);
+            gradient.addColorStop(0, `hsla(${hue}, 70%, 60%, ${alpha})`);
+            gradient.addColorStop(1, `hsla(${hue}, 70%, 60%, 0)`);
+            context.fillStyle = gradient;
+            context.fillRect(cluster.center[0] - glowSize, cluster.center[1] - glowSize, glowSize * 2, glowSize * 2);
 
-              const dx = dotA.screenX - dotB.screenX;
-              const dy = dotA.screenY - dotB.screenY;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              
-              if (dist < maxLineDistance) {
-                context.lineWidth = 0.2;
-                // UPDATED: Use black lines with opacity based on distance
-                context.strokeStyle = `rgba(0, 0, 0, ${1 - dist / maxLineDistance})`;
-                context.beginPath();
-                context.moveTo(dotA.screenX, dotA.screenY);
-                context.lineTo(dotB.screenX, dotB.screenY);
-                context.stroke();
+            if (random.value() < 0.008) cluster.ripples.push({ r: 0, opacity: 0.4 });
+            cluster.ripples.forEach((ripple, i) => {
+              ripple.r += 2.2;
+              ripple.opacity -= 0.005;
+              if (ripple.opacity <= 0) { cluster.ripples.splice(i, 1); return; }
+              context.beginPath();
+              context.strokeStyle = `rgba(50, 50, 80, ${ripple.opacity})`;
+              context.lineWidth = 1;
+              context.arc(cluster.center[0], cluster.center[1], ripple.r, 0, Math.PI * 2);
+              context.stroke();
+            });
+          });
+
+          // Draw Connections
+          const resonanceBins = Array.from({ length: 6 }, () => new Path2D());
+          allNodes.forEach(nodeA => {
+            const gx = (nodeA.screenX / cellSize) | 0;
+            const gy = (nodeA.screenY / cellSize) | 0;
+
+            for (let x = gx - 1; x <= gx + 1; x++) {
+              for (let y = gy - 1; y <= gy + 1; y++) {
+                if (x < 0 || x >= cols || y < 0 || y >= rows) continue;
+                const neighbors = globalGrid[x + y * cols];
+                for (let k = 0; k < neighbors.length; k++) {
+                  const nodeB = neighbors[k];
+                  if (nodeA.uid >= nodeB.uid) continue;
+
+                  const dx = nodeA.screenX - nodeB.screenX;
+                  const dy = nodeA.screenY - nodeB.screenY;
+                  const dSq = dx * dx + dy * dy;
+
+                  if (dSq < maxDistSq) {
+                    const resDiff = Math.abs(nodeA.resonance - nodeB.resonance);
+                    if (resDiff < 0.35) {
+                      const binIdx = (nodeA.resonance * 5) | 0;
+                      resonanceBins[binIdx].moveTo(nodeA.screenX, nodeA.screenY);
+                      resonanceBins[binIdx].lineTo(nodeB.screenX, nodeB.screenY);
+                      
+                      if (random.value() < 0.00015) {
+                        const targetCluster = clusters[random.rangeFloor(0, clusters.length)];
+                        targetCluster.pulses.push({
+                          start: nodeA, 
+                          end: nodeB, 
+                          progress: 0, 
+                          speed: random.range(pulseSpeedRange[0], pulseSpeedRange[1])
+                        });
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
-          
-          // UPDATED: Draw the black dots on top of the lines
-          context.fillStyle = 'black';
-          dots.forEach(dot => {
-            context.beginPath();
-            context.arc(dot.screenX, dot.screenY, dot.screenRadius, 0, Math.PI * 2);
-            context.fill();
+          });
+
+          const colors = [
+            'rgba(148, 163, 184, 0.12)', 'rgba(100, 116, 139, 0.18)',
+            'rgba(71, 85, 105, 0.22)', 'rgba(185, 28, 28, 0.22)',
+            'rgba(220, 38, 38, 0.32)', 'rgba(239, 68, 68, 0.45)'
+          ];
+          context.lineWidth = 0.5;
+          colors.forEach((color, i) => {
+            context.strokeStyle = color;
+            context.stroke(resonanceBins[i]);
+          });
+
+          // Draw Pulses & Nodes
+          clusters.forEach(cluster => {
+            context.fillStyle = '#475569';
+            cluster.pulses.forEach((p, i) => {
+              p.progress += p.speed;
+              if (p.progress >= 1) { cluster.pulses.splice(i, 1); return; }
+              const px = math.lerp(p.start.screenX, p.end.screenX, p.progress);
+              const py = math.lerp(p.start.screenY, p.end.screenY, p.progress);
+              context.fillRect(px - 1.5, py - 1.5, 3, 3);
+            });
+
+            context.fillStyle = '#1e293b';
+            const nodePath = new Path2D();
+            cluster.nodes.forEach(node => {
+              nodePath.moveTo(node.screenX + node.size, node.screenY);
+              nodePath.arc(node.screenX, node.screenY, node.size, 0, Math.PI * 2);
+            });
+            context.fill(nodePath);
           });
         };
       };
 
-      // Start the sketch
       canvasSketch(sketch, settings);
     </script>
   </body>

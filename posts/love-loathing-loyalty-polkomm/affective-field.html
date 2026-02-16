@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affective Counterpublics Visualizer</title>
+    
+    <!-- Fonts matched to your website -->
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-mono/style.css" rel="stylesheet">    
+    
+    <!-- P5.js for generative art -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+        :root {
+            /* Exact Palette from styles.css */
+            --color-1: rgb(230, 231, 236); /* Light Background */
+            --color-2: rgb(23, 16, 33);    /* Dark Text/Particles */
+            
+            --font-headings: 'Geist Sans', sans-serif;
+            --font-mono: 'Geist Mono', monospace;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-1);
+            color: var(--color-2);
+            font-family: var(--font-headings);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .art-container {
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 2px solid var(--color-2);
+            background: var(--color-1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Header UI */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid var(--color-2);
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-align: right;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        /* Canvas Wrapper */
+        #canvas-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            border: 2px solid var(--color-2); /* Thicker border for the frame */
+            background: var(--color-1);
+            overflow: hidden;
+            cursor: crosshair; /* Indicates interaction */
+        }
+
+        /* Labels overlaying the canvas */
+        .zone-label {
+            position: absolute;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            background: var(--color-2);
+            color: var(--color-1);
+            padding: 2px 6px;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="art-container">
+        <div class="header">
+            <h1>Affective<br>Architecture</h1>
+            <div class="meta">
+                FIG 0.1 // INTERACTIVE TRIPTYCH<br>
+                2025 ELECTION DATA
+            </div>
+        </div>
+
+        <div id="canvas-wrapper">
+            <!-- Labels for the zones -->
+            <div class="zone-label" style="top: 10px; left: 10px;">ZONE A: LOYALTY (REPELS CRITIQUE)</div>
+            <div class="zone-label" style="top: 10px; left: 42%;">ZONE B: LOATHING (ATTACKS TARGET)</div>
+            <div class="zone-label" style="top: 52%; left: 42%;">ZONE C: NOISE (DISPLACES)</div>
+        </div>
+    </div>
+
+<script>
+    // --- VARIABLES ---
+    let particles = [];
+    let c1, c2;
+    let canvas;
+    
+    // Grid Definitions (Percentages)
+    const splitX = 0.4;
+    const splitY = 0.5;
+
+    function setup() {
+        const wrapper = document.getElementById('canvas-wrapper');
+        const w = wrapper.clientWidth;
+        const h = wrapper.clientHeight;
+        
+        canvas = createCanvas(w, h);
+        canvas.parent('canvas-wrapper');
+        
+        c1 = color(230, 231, 236); // Light
+        c2 = color(23, 16, 33);    // Dark
+
+        initParticles();
+    }
+
+    function windowResized() {
+        const wrapper = document.getElementById('canvas-wrapper');
+        resizeCanvas(wrapper.clientWidth, wrapper.clientHeight);
+    }
+
+    function initParticles() {
+        particles = [];
+        
+        // 1. Loyalty (Left Panel)
+        for (let i = 0; i < 150; i++) {
+            particles.push(new Particle('loyalty'));
+        }
+        
+        // 2. Loathing (Top Right Panel)
+        for (let i = 0; i < 120; i++) {
+            particles.push(new Particle('loathing'));
+        }
+
+        // 3. Noise (Bottom Right Panel)
+        for (let i = 0; i < 200; i++) {
+            particles.push(new Particle('noise'));
+        }
+    }
+
+    function draw() {
+        background(c1);
+
+        // --- DRAW LAYOUT GRID ---
+        stroke(c2);
+        strokeWeight(2);
+        
+        // Vertical Line
+        line(width * splitX, 0, width * splitX, height);
+        
+        // Horizontal Line (Right side only)
+        line(width * splitX, height * splitY, width, height * splitY);
+
+        // --- DRAW HUBS (Anchors) ---
+        noStroke();
+        fill(c2);
+        
+        // Loyalty Center (Left)
+        let lx = (width * splitX) / 2;
+        let ly = height / 2;
+        ellipse(lx, ly, 15, 15);
+        
+        // Loathing Center (Top Right)
+        let rx = width * splitX + (width * (1-splitX))/2;
+        let ry = (height * splitY) / 2;
+        
+        let shake = random(-2, 2);
+        ellipse(rx + shake, ry + shake, 12, 12);
+        
+        // Noise Center (Bottom Right)
+        let nx = width * splitX + (width * (1-splitX))/2;
+        let ny = height * splitY + (height * (1-splitY))/2;
+        fill(23, 16, 33, 50); 
+        ellipse(nx, ny, 40, 40);
+
+
+        // --- PARTICLES & NETWORKS ---
+        strokeWeight(0.5);
+        
+        for (let i = 0; i < particles.length; i++) {
+            let p1 = particles[i];
+            p1.update();
+            p1.show(); 
+
+            // Optimization: Only connect if close AND same type
+            if (p1.type === 'noise') continue; // Noise has no web
+
+            for (let j = i + 1; j < particles.length; j++) {
+                let p2 = particles[j];
+                if (p1.type !== p2.type) continue;
+                
+                let d = dist(p1.pos.x, p1.pos.y, p2.pos.x, p2.pos.y);
+
+                if (p1.type === 'loyalty') {
+                    if (d < 50) {
+                        stroke(23, 16, 33, map(d, 0, 50, 60, 0));
+                        line(p1.pos.x, p1.pos.y, p2.pos.x, p2.pos.y);
+                    }
+                } else if (p1.type === 'loathing') {
+                    if (d < 30) {
+                        stroke(23, 16, 33, 100);
+                        line(p1.pos.x, p1.pos.y, p2.pos.x, p2.pos.y);
+                    }
+                }
+            }
+            
+            // Connection to Hub
+            if (p1.type === 'loyalty') {
+                let dCenter = dist(p1.pos.x, p1.pos.y, lx, ly);
+                if(dCenter < 100) {
+                    stroke(23, 16, 33, map(dCenter, 0, 100, 20, 0));
+                    line(p1.pos.x, p1.pos.y, lx, ly);
+                }
+            }
+        }
+    }
+
+    // --- PARTICLE CLASS ---
+    class Particle {
+        constructor(type) {
+            this.type = type;
+            this.respawn();
+            this.pos = this.getRandomPosInBounds(); 
+        }
+
+        respawn() {
+            this.vel = createVector(0, 0);
+            this.acc = createVector(0, 0);
+        }
+        
+        getRandomPosInBounds() {
+            let minX, maxX, minY, maxY;
+            
+            if (this.type === 'loyalty') {
+                minX = 0; maxX = width * splitX;
+                minY = 0; maxY = height;
+            } else if (this.type === 'loathing') {
+                minX = width * splitX; maxX = width;
+                minY = 0; maxY = height * splitY;
+            } else { // noise
+                minX = width * splitX; maxX = width;
+                minY = height * splitY; maxY = height;
+            }
+            
+            // Padding
+            return createVector(
+                random(minX + 10, maxX - 10),
+                random(minY + 10, maxY - 10)
+            );
+        }
+
+        update() {
+            // Define Center Points & Bounds
+            let cx, cy;
+            let minX, maxX, minY, maxY;
+            
+            if (this.type === 'loyalty') {
+                cx = (width * splitX) / 2;
+                cy = height / 2;
+                minX = 0; maxX = width * splitX;
+                minY = 0; maxY = height;
+            } else if (this.type === 'loathing') {
+                cx = width * splitX + (width * (1-splitX))/2;
+                cy = (height * splitY) / 2;
+                minX = width * splitX; maxX = width;
+                minY = 0; maxY = height * splitY;
+            } else {
+                cx = width * splitX + (width * (1-splitX))/2;
+                cy = height * splitY + (height * (1-splitY))/2;
+                minX = width * splitX; maxX = width;
+                minY = height * splitY; maxY = height;
+            }
+
+            // --- FORCES ---
+            
+            // 1. Attraction to local center
+            let center = createVector(cx, cy);
+            let dir = p5.Vector.sub(center, this.pos);
+            let d = dir.mag();
+            dir.normalize();
+            
+            // 2. MOUSE INTERACTION (THE DISRUPTOR)
+            let mouse = createVector(mouseX, mouseY);
+            let mouseDir = p5.Vector.sub(this.pos, mouse);
+            let mouseDist = mouseDir.mag();
+            let isMouseInBounds = (mouseX > minX && mouseX < maxX && mouseY > minY && mouseY < maxY);
+
+            if (isMouseInBounds && mouseDist < 120) {
+                mouseDir.normalize();
+                
+                if (this.type === 'loyalty') {
+                    // DEFENSE: Repel Mouse (Insulation)
+                    let force = mouseDir.mult(3.0); 
+                    this.acc.add(force);
+                } else if (this.type === 'loathing') {
+                    // ATTACK: Attract Mouse (Target Fixation)
+                    let force = mouseDir.mult(-4.0); 
+                    this.acc.add(force);
+                } else {
+                    // NOISE: Displace/Swirl
+                    let force = mouseDir.mult(0.8);
+                    this.acc.add(force);
+                }
+            }
+
+            // 3. Regular Physics
+            if (this.type === 'loyalty') {
+                // Orbital Physics
+                let force = dir.copy();
+                force.mult(0.1); 
+                this.acc.add(force);
+                
+                // Perpendicular Push
+                let steer = createVector(-dir.y, dir.x);
+                steer.mult(0.5);
+                this.acc.add(steer);
+                
+            } else if (this.type === 'loathing') {
+                // Chaotic Bouncing
+                if (d < 20) {
+                    let rep = dir.copy().mult(-2);
+                    this.acc.add(rep);
+                } else {
+                    this.acc.add(dir.mult(0.05));
+                }
+                let jitter = p5.Vector.random2D().mult(0.8);
+                this.acc.add(jitter);
+                
+            } else { // Noise
+                let drift = p5.Vector.random2D().mult(0.2);
+                this.acc.add(drift);
+                this.acc.add(dir.mult(0.005));
+            }
+
+            // 4. Integration
+            this.vel.add(this.acc);
+            
+            // Speed Limits
+            let maxSpeed = (this.type === 'loathing') ? 4 : (this.type === 'loyalty' ? 2 : 1);
+            this.vel.limit(maxSpeed);
+            
+            this.pos.add(this.vel);
+            this.acc.mult(0);
+
+            // 5. HARD BOUNDARY CHECKS
+            if (this.pos.x < minX) { this.pos.x = minX; this.vel.x *= -1; }
+            if (this.pos.x > maxX) { this.pos.x = maxX; this.vel.x *= -1; }
+            if (this.pos.y < minY) { this.pos.y = minY; this.vel.y *= -1; }
+            if (this.pos.y > maxY) { this.pos.y = maxY; this.vel.y *= -1; }
+        }
+
+        show() {
+            noStroke();
+            if (this.type === 'loyalty') {
+                fill(23, 16, 33, 200);
+                ellipse(this.pos.x, this.pos.y, 4, 4);
+            } else if (this.type === 'loathing') {
+                fill(23, 16, 33, 200);
+                rect(this.pos.x, this.pos.y, 3, 3);
+            } else {
+                fill(23, 16, 33, 120);
+                rect(this.pos.x, this.pos.y, 2, 2);
+            }
+        }
+    }
+</script>
+</body>
+</html>
