@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a986a95301e671fce2c6472dffc862a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-afa37c5c79185640b9c231024f4fe5ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -181,7 +182,7 @@ cookieconsent.run({
   <p class="abstract">
     A study of the German right-wing populist party AfD's TikTok usage during the 2024 European elections reveals a strategic focus on user concerns over traditional divisive rhetoric. Analyzing video transcripts from the three months preceding the election, the study found that while anti-institutional and protectionist themes were present, content addressing issues like inflation, security, and individual rights garnered significantly higher engagement. This approach, which outperformed all other German parties combined, suggests the AfD effectively broadened its appeal by prioritizing relatable anxieties. By blending polarizing content with everyday worries, the party successfully engaged a wider audience, raising new questions about effective online populist communication.
   </p>
-  <a href="10.31219/osf.io/yk3u4" class="link-button">Read Publication</a>
+  <a href="https://doi.org/10.1080/1369118X.2025.2553016" class="link-button">Read Publication</a>
 </div>
 
 
@@ -238,13 +239,14 @@ cookieconsent.run({
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
