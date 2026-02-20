@@ -7,12 +7,11 @@ author:
   - name: Lasse Rodeck
     affiliation: University of Hamburg
   - name: Matthias Revers
-    affiliation: University of Leeds/ University of Hamburg
+    affiliation: University of Leeds | University of Hamburg
   - name: Hendrik Meyer
     affiliation: University of Hamburg
 date: 2026-02-16
 categories: [Politics, TikTok, Computational Social Science, Elections, Germany]
-image: images/tiktok_election_2025.png # Placeholder path
 filters:
    - lightbox
 lightbox: auto
