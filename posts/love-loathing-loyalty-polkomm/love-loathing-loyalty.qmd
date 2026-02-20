@@ -1,6 +1,6 @@
 ---
 title: "Love, Loathing, and Loyalty: Affective Counterpublics on German Political TikTok"
-description: 'This article summarizes key insights from our talk "Love, Loathing, and Loyalty: Affective Counterpublics on German Political TikTok", presented at the Annual Conference of the DGPuK Division "Communication and Politics". Held in Hamburg on February 4, 2026, the presentation explored how fringe parties mobilized "affective counterpublics" during the federal election campaign.'
+description: 'This article summarizes key insights from our talk "Love, Loathing, and Loyalty: Affective Counterpublics on German Political TikTok", presented at the Annual Conference of the DGPuK Division "Communication and Politics" an presnets some additional analyses. Held in Hamburg on February 5, 2026, the presentation explored how parties from the ends of the ideological spectrum mobilized "affective counterpublics" during the federal election campaign.'
 author:
   - name: Julia Niemann-Lenz
     affiliation: DZHW (German Centre for Higher Education Research and Science Studies)
@@ -49,7 +49,7 @@ Our research, titled *Love, Loathing, and Loyalty: Affective Counterpublics on G
 ### Key Takeaways
 
 -   **Dominance of the Fringe:** While the SPD produced the most content, the AfD dominated engagement with 171 million plays.
--   **The Affective Divide:** Fringe parties (AfD, BSW, Die Linke) generate "love" and loyalty; centrist parties (CDU, SPD, Greens) trigger "loathing" and rejection.
+-   **The Affective Divide:** Parties from the ends of the ideological spectrum (AfD, BSW, Die Linke) generate "love" and loyalty; centrist parties (CDU, SPD, Greens) trigger "loathing" and rejection.
 -   **Party over Policy:** User sentiment is driven by the *messenger*, not the *message*. Popular topics do not save unpopular parties.
 -   **Methodology:** A hybrid AI analysis of 20,000 videos and 2 million comments using Whisper, GPT-OSS, and SetFit.
 :::
@@ -103,7 +103,7 @@ We aimed to distinguish between mere "noise"—the volume of videos posted—and
 ::: card-body
 ### H1: Polarization Advantage
 
-**Hypothesis:** Fringe actors create "counterpublic spaces" of mutual affirmation.
+**Hypothesis:** Parties on the end of the ideological spectrum create "counterpublic spaces" of mutual affirmation.
 
 We predicted parties at the ideological ends would receive significantly higher positive affect, while the center would function as a target for frustration.
 :::
