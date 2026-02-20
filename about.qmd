@@ -21,8 +21,12 @@ Our project brings together a diverse team of researchers with expertise in poli
 
 <p class="small-text">
 
-University of Leeds/University of Hamburg
+University of Leeds | University of Hamburg  
 
+<!-- Associate Professor of Political Communication at the University of Leeds and Interim Professor (part-time) for the Chair of Communication Studies, esp. Climate and Science Communication at the University of Hamburg. Faculty Fellow at the Center for Cultural Sociology at Yale University and a former Fulbright scholar. -->
+
+
+[Website](https://matthiasrevers.com/)
 </p>
 :::
 

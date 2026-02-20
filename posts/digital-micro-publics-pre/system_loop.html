@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process Loop</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;600;800&display=swap');
+
+  :root {
+      --bg: rgb(23, 16, 33);
+      --fg: rgb(230, 231, 235);
+      --accent: #fff;
+      --font-sans: 'Geist', sans-serif;
+      --font-mono: 'Geist Mono', monospace;
+  }
+
+  body {
+      background-color: var(--bg);
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: var(--font-mono);
+  }
+
+  .system-container {
+      width: 100%;
+      max-width: 600px;
+      padding: 2rem;
+      position: relative;
+  }
+
+  /* CONNECTING LINE */
+  .line-container {
+      position: absolute;
+      left: 3rem;
+      top: 3rem;
+      bottom: 3rem;
+      width: 2px;
+      background: rgba(255,255,255,0.1);
+      z-index: 0;
+  }
+
+  /* THE PULSE ANIMATION */
+  .pulse {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, #fff, transparent);
+      animation: drop 2s infinite linear;
+      z-index: 1;
+  }
+
+  @keyframes drop {
+      0% { top: -10%; opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+  }
+
+  /* NODE STYLING */
+  .node {
+      position: relative;
+      background: var(--bg); /* Masks the line behind */
+      margin-bottom: 3rem;
+      padding-left: 4rem;
+      z-index: 2;
+  }
+
+  .node:last-child { margin-bottom: 0; }
+
+  /* THE ICON/MARKER */
+  .marker {
+      position: absolute;
+      left: 2rem; /* Centers on the line */
+      top: 0;
+      width: 2rem; /* Center anchor */
+      height: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      transform: translateX(-50%);
+  }
+
+  .dot {
+      width: 12px;
+      height: 12px;
+      background: var(--bg);
+      border: 2px solid var(--fg);
+      border-radius: 50%;
+      margin-top: 6px;
+      transition: all 0.3s ease;
+  }
+
+  .node:hover .dot {
+      background: var(--fg);
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+      transform: scale(1.3);
+  }
+
+  /* TEXT CONTENT */
+  h3 {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      margin: 0 0 0.5rem 0;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+  }
+
+  p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      line-height: 1.5;
+      margin: 0;
+  }
+
+  .meta {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 0.2rem;
+      display: block;
+  }
+
+  /* LOOP CONNECTOR */
+  .loop-return {
+      position: absolute;
+      right: -20px;
+      top: 20px;
+      bottom: 20px;
+      width: 40px;
+      border-right: 1px dashed rgba(255,255,255,0.2);
+      border-top: 1px dashed rgba(255,255,255,0.2);
+      border-bottom: 1px dashed rgba(255,255,255,0.2);
+      border-radius: 0 20px 20px 0;
+      opacity: 0.5;
+  }
+  
+</style>
+</head>
+<body>
+
+<div class="system-container">
+  <!-- Vertical Line Structure -->
+  <div class="line-container">
+      <div class="pulse"></div>
+  </div>
+
+  <!-- Decorative Loop Line -->
+  <div class="loop-return"></div>
+
+  <!-- NODE 1 -->
+  <div class="node">
+      <div class="marker"><div class="dot"></div></div>
+      <span class="meta">Input Signal</span>
+      <h3>Human Interaction</h3>
+      <p>Affordance-driven action (Like, Share, Reply) creates the initial data point.</p>
+  </div>
+
+  <!-- NODE 2 -->
+  <div class="node">
+      <div class="marker"><div class="dot"></div></div>
+      <span class="meta">Processing</span>
+      <h3>Algorithmic Mediation</h3>
+      <p>The system interprets social friction as engagement signals, ignoring semantic content.</p>
+  </div>
+
+  <!-- NODE 3 -->
+  <div class="node">
+      <div class="marker"><div class="dot"></div></div>
+      <span class="meta">Output / Feedback</span>
+      <h3>Structural Amplification</h3>
+      <p>Visibility is re-distributed. The thread expands, inviting more polarized participation.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

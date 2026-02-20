@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dimensions Stack</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Gelasio:ital,wght@0,500;0,700;1,400&family=Geist:wght@400;600&display=swap');
+
+  :root {
+      --bg: rgb(230, 231, 235);
+      --fg: rgb(23, 16, 33);
+      --font-serif: 'Gelasio', serif;
+      --font-mono: 'Geist Mono', monospace;
+      --font-sans: 'Geist', sans-serif;
+  }
+
+  body {
+      background-color: transparent;
+      margin: 0;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      font-family: var(--font-sans);
+  }
+
+  .stack-container {
+      width: 100%;
+      max-width: 600px; /* Fits standard blog column */
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  .stack-header {
+      text-align: center;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--fg);
+      padding-bottom: 1rem;
+  }
+
+  .stack-header h2 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      margin: 0;
+      color: var(--fg);
+  }
+
+  /* CARD STYLING */
+  .card {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 1.5rem;
+      border-radius: 4px; /* Slight rounding */
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--fg);
+  }
+
+  .card:hover {
+      transform: translateX(5px);
+      box-shadow: -5px 5px 0px rgba(23, 16, 33, 0.3);
+      background: var(--fg); /* Keep dark */
+  }
+
+  /* NUMBER */
+  .card-num {
+      font-family: var(--font-mono);
+      font-size: 3rem;
+      position: absolute;
+      right: 1rem;
+      top: 0rem;
+      opacity: 0.1;
+      font-weight: bold;
+      pointer-events: none;
+  }
+
+  /* TITLE */
+  .card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin: 0 0 0.5rem 0;
+      z-index: 2;
+  }
+
+  /* TEXT */
+  .card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+      opacity: 0.9;
+      z-index: 2;
+      max-width: 85%;
+  }
+
+  /* THE REVEAL QUESTION */
+  .query-box {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed rgba(255,255,255,0.3);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #fff;
+      font-style: italic;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+  }
+
+  .card:hover .query-box {
+      opacity: 1;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="stack-container">
+  <div class="stack-header">
+      <h2>Methodological Dimensions</h2>
+  </div>
+
+  <!-- CARD 1 -->
+  <div class="card">
+      <div class="card-num">01</div>
+      <h3>Actors & Practices</h3>
+      <p>Analyzing the performative enactment of roles (moderators, lurkers) rather than static user counts.</p>
+      <div class="query-box">RQ: How do actors perceive and enact their roles?</div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card">
+      <div class="card-num">02</div>
+      <h3>Meaning</h3>
+      <p>Granular analysis of narratives, frames, and opinion expression within the thread.</p>
+      <div class="query-box">RQ: What is being negotiated, and how?</div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card">
+      <div class="card-num">03</div>
+      <h3>Resonance</h3>
+      <p>Measuring affective intensity and the texture of reaction chains between users.</p>
+      <div class="query-box">RQ: How do users react to the debate?</div>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="card">
+      <div class="card-num">04</div>
+      <h3>Structure & Power</h3>
+      <p>Analyzing algorithmic amplification and visibility hierarchies created by the platform.</p>
+      <div class="query-box">RQ: Who is amplified by the system?</div>
+  </div>
+</div>
+
+</body>
+</html>

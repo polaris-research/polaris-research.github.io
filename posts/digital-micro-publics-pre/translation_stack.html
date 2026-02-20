@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Translation Dictionary</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Gelasio:ital,wght@0,500;0,700;1,400&family=Geist:wght@400;600&display=swap');
+
+  :root {
+      /* Matching your styles.css */
+      --bg: rgb(230, 231, 235);
+      --fg: rgb(23, 16, 33);
+      --font-serif: 'Gelasio', serif;
+      --font-mono: 'Geist Mono', monospace;
+      --font-sans: 'Geist', sans-serif;
+  }
+
+  body {
+      background-color: transparent; /* Blends with blog */
+      margin: 0;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      font-family: var(--font-sans);
+  }
+
+  .dict-container {
+      width: 100%;
+      max-width: 600px; /* Standard Blog Column Width */
+      background: var(--bg);
+      border: 2px solid var(--fg);
+      box-shadow: 6px 6px 0px var(--fg); /* Hard Shadow */
+      display: flex;
+      flex-direction: column;
+  }
+
+  /* HEADER */
+  .header {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid var(--fg);
+  }
+
+  .header h2 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+  }
+
+  .header span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      opacity: 0.8;
+      display: block;
+      margin-top: 0.5rem;
+  }
+
+  /* ENTRIES */
+  .entry {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--fg);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: background 0.2s;
+  }
+
+  .entry:last-child { border-bottom: none; }
+  
+  .entry:hover {
+      background: rgba(23, 16, 33, 0.05);
+  }
+
+  .category-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      opacity: 0.5;
+  }
+
+  /* THE TRANSFORMATION VISUAL */
+  .transformation {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      line-height: 1.4;
+  }
+
+  .old-term {
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: var(--fg);
+      opacity: 0.5;
+      font-style: italic;
+  }
+
+  .arrow {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--fg);
+  }
+
+  .new-term {
+      font-weight: 700;
+      color: var(--fg);
+      background: rgba(23, 16, 33, 0.1);
+      padding: 0 4px;
+  }
+
+  /* DEFINITION TEXT */
+  .definition {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      opacity: 0.8;
+      margin-top: 0.2rem;
+      max-width: 90%;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="dict-container">
+  <div class="header">
+      <h2>Concept Shift</h2>
+      <span>Re-defining Publicness for Platforms</span>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="entry">
+      <div class="category-label">01. The Arena</div>
+      <div class="transformation">
+          <span class="old-term">Physical Space</span>
+          <span class="arrow">&rarr;</span>
+          <span class="new-term">Digital Artifact</span>
+      </div>
+      <div class="definition">
+          Publics no longer gather in squares, but around specific objects (posts, videos, tweets).
+      </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="entry">
+      <div class="category-label">02. Interaction Mode</div>
+      <div class="transformation">
+          <span class="old-term">Proximity</span>
+          <span class="arrow">&rarr;</span>
+          <span class="new-term">Digital Trace</span>
+      </div>
+      <div class="definition">
+          Friction between bodies is replaced by signals (likes, shares) mediated by algorithms.
+      </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="entry">
+      <div class="category-label">03. Temporality</div>
+      <div class="transformation">
+          <span class="old-term">Fleeting</span>
+          <span class="arrow">&rarr;</span>
+          <span class="new-term">Persistent</span>
+      </div>
+      <div class="definition">
+          Encounters are not ephemeral; they are recorded, stored, and searchable asynchronously.
+      </div>
+  </div>
+</div>
+
+</body>
+</html>
