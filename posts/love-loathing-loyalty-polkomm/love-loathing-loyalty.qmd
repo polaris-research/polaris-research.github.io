@@ -13,7 +13,6 @@ author:
 date: 2026-02-16
 categories: [Politics, TikTok, Computational Social Science, Elections, Germany]
 image: images/tiktok_election_2025.png # Placeholder path
-draft: true
 filters:
    - lightbox
 lightbox: auto
