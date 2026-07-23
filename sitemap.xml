@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://polaris-research.github.io/about.html</loc>
-    <lastmod>2026-02-20T14:07:22.521Z</lastmod>
-  </url>
-  <url>
-    <loc>https://polaris-research.github.io/blog.html</loc>
-    <lastmod>2026-02-20T14:07:22.521Z</lastmod>
-  </url>
-  <url>
     <loc>https://polaris-research.github.io/index.html</loc>
-    <lastmod>2026-02-20T14:07:22.528Z</lastmod>
+    <lastmod>2026-07-23T09:49:21.526Z</lastmod>
   </url>
   <url>
     <loc>https://polaris-research.github.io/posts/love-loathing-loyalty-polkomm/love-loathing-loyalty.html</loc>
-    <lastmod>2026-02-20T14:07:22.551Z</lastmod>
+    <lastmod>2026-07-23T09:49:21.551Z</lastmod>
   </url>
   <url>
     <loc>https://polaris-research.github.io/publications.html</loc>
-    <lastmod>2026-02-20T14:07:22.573Z</lastmod>
+    <lastmod>2026-07-23T09:49:21.573Z</lastmod>
+  </url>
+  <url>
+    <loc>https://polaris-research.github.io/blog.html</loc>
+    <lastmod>2026-07-23T09:49:21.520Z</lastmod>
+  </url>
+  <url>
+    <loc>https://polaris-research.github.io/about.html</loc>
+    <lastmod>2026-07-23T09:49:21.520Z</lastmod>
   </url>
 </urlset>

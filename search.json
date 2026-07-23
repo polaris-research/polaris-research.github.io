@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Our project brings together a diverse team of researchers with expertise in political communication, media studies, network analysis, and computational methods.\n\n\n\n\n\nUniversity of Leeds | University of Hamburg\n\nWebsite\n\n\n\n\n\nDZHW, Hannover\n\n\n\n\n\nUniversity of Hamburg\n\n\n\n\n\nUniversity of Hamburg"
-  },
-  {
-    "objectID": "about.html#the-research-team",
-    "href": "about.html#the-research-team",
-    "title": "About",
-    "section": "",
-    "text": "Our project brings together a diverse team of researchers with expertise in political communication, media studies, network analysis, and computational methods.\n\n\n\n\n\nUniversity of Leeds | University of Hamburg\n\nWebsite\n\n\n\n\n\nDZHW, Hannover\n\n\n\n\n\nUniversity of Hamburg\n\n\n\n\n\nUniversity of Hamburg"
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nLove, Loathing, and Loyalty: Affective Counterpublics on German Political TikTok\n\n\n\nPolitics\n\nTikTok\n\nComputational Social Science\n\nElections\n\nGermany\n\n\n\nThis article summarizes key insights from our talk “Love, Loathing, and Loyalty: Affective Counterpublics on German Political TikTok”, presented at the Annual Conference of the DGPuK Division “Communication and Politics” an presnets some additional analyses. Held in Hamburg on February 5, 2026, the presentation explored how parties from the ends of the ideological spectrum mobilized “affective counterpublics” during the federal election campaign.\n\n\n\n\n\nFeb 16, 2026\n\n\nJulia Niemann-Lenz, Lasse Rodeck, Matthias Revers, Hendrik Meyer\n\n8 min\n\n1,477 words\n\n\n\n\n\nNo matching items\n Back to top"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Polarization in Online Landscapes and Radical Influence Studies",
@@ -61,5 +40,26 @@
     "title": "Publications",
     "section": "",
     "text": "Beyond Anti-Elitism and Out-Group Attacks: How Concerns Shape the AfD’s Populist Representation on German TikTok During the 2024 European Elections\n  \n    H. Meyer, J. Niemann-Lenz, L. Rodeck, and M. Revers\n    -\n    \n  \n  \n    This study investigates the TikTok communication strategies of the German populist party Alternative for Germany (AfD) during the 2024 European elections. Using LLM-enhanced topic modeling to analyze video transcriptions, we identified three primary discursive strategies: horizontal out-group attacks, vertical anti-elitism, and a focus on relatable public concerns (e.g., inflation and security).\n\nOur findings reveal that while divisive identity-based rhetoric generates high engagement, the AfD primarily focused on anti-elitist themes combined with everyday voter insecurities. By grounding its extremist agenda in these relatable issues, the AfD effectively obscured its radicalism and generated more engagement than all other German parties combined. These results highlight how right-wing populists exploit online platforms to dominate political discourse by balancing divisive messaging with strategic issue-resonance.\n  \n  Read Publication\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nLove, Loathing, and Loyalty: Affective Counterpublics on German Political TikTok\n\n\n\nPolitics\n\nTikTok\n\nComputational Social Science\n\nElections\n\nGermany\n\n\n\nThis article summarizes key insights from our talk “Love, Loathing, and Loyalty: Affective Counterpublics on German Political TikTok”, presented at the Annual Conference of the DGPuK Division “Communication and Politics” an presnets some additional analyses. Held in Hamburg on February 5, 2026, the presentation explored how parties from the ends of the ideological spectrum mobilized “affective counterpublics” during the federal election campaign.\n\n\n\n\n\nFeb 16, 2026\n\n\nJulia Niemann-Lenz, Lasse Rodeck, Matthias Revers, Hendrik Meyer\n\n8 min\n\n1,477 words\n\n\n\n\n\nNo matching items\n Back to top"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Our project brings together a diverse team of researchers with expertise in political communication, media studies, network analysis, and computational methods.\n\n\n\n\n\nUniversity of Leeds | University of Hamburg\n\nWebsite\n\n\n\n\n\nDZHW, Hannover\nWebsite\n\n\n\n\n\nUniversity of Hamburg\n\n\n\n\n\nUniversity of Hamburg"
+  },
+  {
+    "objectID": "about.html#the-research-team",
+    "href": "about.html#the-research-team",
+    "title": "About",
+    "section": "",
+    "text": "Our project brings together a diverse team of researchers with expertise in political communication, media studies, network analysis, and computational methods.\n\n\n\n\n\nUniversity of Leeds | University of Hamburg\n\nWebsite\n\n\n\n\n\nDZHW, Hannover\nWebsite\n\n\n\n\n\nUniversity of Hamburg\n\n\n\n\n\nUniversity of Hamburg"
   }
 ]
